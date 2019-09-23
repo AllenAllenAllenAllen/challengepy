@@ -48,7 +48,7 @@ def get_clubs(soup):
     This function should return a list of soups with each soup corresponding to the html
     for a single club.
     """
-    return [] # TODO: Implement this function
+    return get_elements_with_class(soup, "div", "box")
 
 def get_club_name(club):
     """
@@ -65,11 +65,28 @@ def get_club_description(club):
     """
     Extract club description from a soup containing a single club.
     """
-    return '' # TODO: Implement this function
+    elts = get_elements_with_class(club, 'em', None)
+    if len(elts) < 1:
+        return ""
+    return elts[0].text
 
 def get_club_tags(club):
     """
     Get the tag labels for all tags associated with a single club.
     """
-    return [] # TODO: Implement this function
+    elts = get_elements_with_class(club, "span", "tag is-info is-rounded")
+    if len(elts) < 1:
+        return []
+    return [tag.text for tag in elts]
+
+def save_club_col(club_col):
+    club_lst = []
+    soup = soupify(get_clubs_html())
+    clubs = get_clubs(soup)
+    for c in clubs:
+        name = get_club_name(c)
+        tags = get_club_tags(c)
+        desc = get_club_description(c)
+        club_lst.append({"name": name, "tags": tags, "desc": desc})
+    club_col.insert_many(club_lst)
 
