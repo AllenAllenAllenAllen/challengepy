@@ -27,8 +27,7 @@ def soupify(html):
     to an HTML document or snippet which has been parsed and loaded into BeautifulSoup so that
     we can query what's inside of it with BeautifulSoup.
     """
-    return BeautifulSoup(html, "html.parser") 
-
+    return BeautifulSoup(html, "html.parser")
 
 def get_elements_with_class(soup, elt, cls):
     """
@@ -80,6 +79,11 @@ def get_club_tags(club):
     return [tag.text for tag in elts]
 
 def save_club_col(club_col):
+    """
+    Save all club data into mongoDB
+    :param club_col:
+    :return: number of clubs added into mongoDB
+    """
     club_lst = []
     soup = soupify(get_clubs_html())
     clubs = get_clubs(soup)
@@ -87,6 +91,6 @@ def save_club_col(club_col):
         name = get_club_name(c)
         tags = get_club_tags(c)
         desc = get_club_description(c)
-        club_lst.append({"name": name, "tags": tags, "desc": desc})
-    club_col.insert_many(club_lst)
+        club_lst.append({"name": name, "tags": tags, "desc": desc, "favo_counts": 0})
+    return len(club_col.insert_many(club_lst).inserted_ids)
 

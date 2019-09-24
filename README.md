@@ -1,21 +1,13 @@
 # Penn Labs Server Challenge
 Remember to **document your work** in this `README.md` file! Feel free to delete these installation instructions in your fork of this repository.
 
-## Installation
-1. Fork + clone this repository. 
-2. `cd` into the cloned repository.
-3. Install `pipenv`
-  * `brew install pipenv` if you're on a Mac.
-  * `pip install --user --upgrade pipenv` for most other machines.
-4. Install packages using `pipenv install`.
+## New Feature Implementation
+Let users post comments where they can describe their experiences about specific clubs.
+I implemented by creating a new collection called "comment" in MongoDB, which has three fields: "username", "club" and "comment".
 
-## Developing
-1. Use `pipenv run index.py` to run the project.
-2. Follow the instructions [here](https://www.notion.so/pennlabs/Server-Challenge-Fall-19-480abf1871fc4a8d9600154816726343).
-3. Document your work in the `README.md` file.
+## Bonus Challenges
+1. (POST /api/club) In addition to creating a new club, updates to existing clubs are also allowed.
+2. (Database Management) All information needed for the app is stored in MongoDB.
 
-## Submitting
-Submit a link to your git repository to [this form](https://airtable.com/shrqdIzlLgiRFzEWh) by 11:59pm on Monday, September 23rd.
-
-## Installing Additional Packages
-To install additional packages run `pipenv install <package_name>` within the cloned repository.
+## Additional Comments
+For each API, I did very rigorous check on the parameter format and content.
